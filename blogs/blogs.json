@@ -1,0 +1,14 @@
+{
+  "repo": "griffith",
+  "feeds": [
+    {
+      "source": "https://news.griffith.edu.au/",
+      "feed_url": "https://news.griffith.edu.au/feed/",
+      "title": "Griffith News",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

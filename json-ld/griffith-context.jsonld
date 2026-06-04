@@ -1,0 +1,96 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "griffith": "https://www.griffith.edu.au/ns#",
+
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "identifier": "schema:identifier",
+    "handle": {
+      "@id": "dcterms:identifier"
+    },
+    "uuid": {
+      "@id": "schema:identifier"
+    },
+
+    "Organization": "schema:CollegeOrUniversity",
+    "alternateName": "schema:alternateName",
+    "logo": {
+      "@id": "schema:logo",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    },
+    "address": "schema:address",
+    "areaServed": "schema:areaServed",
+
+    "DataCatalog": "schema:DataCatalog",
+    "Dataset": "schema:Dataset",
+    "Collection": "schema:Collection",
+    "Community": {
+      "@id": "griffith:Community"
+    },
+    "CreativeWork": "schema:CreativeWork",
+
+    "communities": {
+      "@id": "griffith:communities",
+      "@container": "@set"
+    },
+    "collections": {
+      "@id": "schema:hasPart",
+      "@container": "@set"
+    },
+    "subcommunities": {
+      "@id": "griffith:subcommunities",
+      "@container": "@set"
+    },
+    "parentCommunity": {
+      "@id": "griffith:parentCommunity",
+      "@type": "@id"
+    },
+    "items": {
+      "@id": "schema:hasPart",
+      "@container": "@set"
+    },
+    "bitstreams": {
+      "@id": "griffith:bitstreams",
+      "@container": "@set"
+    },
+
+    "title": "dc:title",
+    "creator": "dc:creator",
+    "subject": "dc:subject",
+    "publisher": "dc:publisher",
+    "issued": "dcterms:issued",
+    "type": "schema:additionalType",
+    "rights": "dcterms:rights",
+    "metadata": {
+      "@id": "griffith:metadata"
+    }
+  },
+
+  "@type": "Organization",
+  "@id": "https://www.griffith.edu.au/",
+  "name": "Griffith University",
+  "alternateName": "Griffith",
+  "url": "https://www.griffith.edu.au/",
+  "description": "Public research university in Queensland, Australia. Operates Griffith Research Online (GRO), a DSpace 7.6 institutional repository exposing a REST API and an OAI-PMH 2.0 endpoint, plus a Canvas LMS instance.",
+  "areaServed": "Queensland, Australia",
+  "sameAs": [
+    "https://github.com/GriffithUniLibrary",
+    "https://github.com/gu-eresearch",
+    "https://www.linkedin.com/school/griffith-university/"
+  ],
+  "DataCatalog": {
+    "@type": "DataCatalog",
+    "name": "Griffith Research Online",
+    "url": "https://research-repository.griffith.edu.au/",
+    "description": "Institutional repository of Griffith publications and research outputs, accessible via a DSpace REST API and an OAI-PMH 2.0 harvesting endpoint."
+  }
+}
