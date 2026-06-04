@@ -1,0 +1,89 @@
+---
+aid: griffith
+name: Griffith University
+description: >-
+  Griffith University is a public research university in Queensland, Australia, ranked
+  #255 in the QS World University Rankings 2025. Its public, machine-readable developer
+  footprint centers on research and library infrastructure rather than a formal developer
+  portal. Griffith Research Online (GRO), the institutional repository, runs on DSpace 7.6
+  and exposes both a REST API and an OAI-PMH 2.0 endpoint for harvesting publication and
+  research-output metadata. The university also operates a Canvas LMS instance whose
+  Instructure REST API documentation is publicly reachable, and maintains active GitHub
+  organizations for its Library and eResearch Services teams. No unified, self-service
+  Griffith developer portal was found; most administrative, course, timetable, and identity
+  interfaces are gated behind institutional affiliation.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/griffith/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Australia
+  - Research
+  - Open Data
+  - Repository
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: griffith:gro-rest
+    name: Griffith Research Online (GRO) DSpace REST API
+    description: >-
+      REST API for Griffith Research Online, the university's institutional repository,
+      running on DSpace 7.6. Provides programmatic access to communities, collections,
+      items, bitstreams, and metadata for Griffith research outputs. The API root at
+      /server/api confirms the live DSpace REST interface.
+    humanURL: https://research-repository.griffith.edu.au/
+    baseURL: https://research-repository.griffith.edu.au/server/api
+    tags: [ Repository, Research, DSpace, Metadata, Open Data ]
+    properties:
+      - type: Documentation
+        url: https://research-repository.griffith.edu.au/
+  - aid: griffith:gro-oai
+    name: Griffith Research Online OAI-PMH
+    description: >-
+      OAI-PMH 2.0 metadata harvesting endpoint for Griffith Research Online. Supports the
+      standard OAI verbs (Identify, ListMetadataFormats, ListRecords, etc.) for harvesting
+      Dublin Core and other metadata describing Griffith publications and research outputs.
+    humanURL: https://research-repository.griffith.edu.au/
+    baseURL: https://research-repository.griffith.edu.au/oai/request
+    tags: [ OAI-PMH, Repository, Research, Metadata, Harvesting ]
+    properties:
+      - type: Documentation
+        url: https://researchdata.edu.au/griffith-research-online-oai-protocol/8941
+  - aid: griffith:canvas-lms
+    name: Griffith Canvas LMS REST API
+    description: >-
+      Griffith University operates a Canvas (Instructure) learning management system at
+      lms.griffith.edu.au. The Canvas LMS REST API documentation is publicly reachable and
+      describes endpoints for courses, enrollments, assignments, and developer keys. Live
+      API access requires authentication and institutional credentials, and Instructure has
+      noted the docs will redirect to its central developer portal after July 1, 2026.
+    humanURL: https://lms.griffith.edu.au/doc/api/index.html
+    tags: [ LMS, Canvas, Instructure, Teaching, Learning ]
+    properties:
+      - type: Documentation
+        url: https://lms.griffith.edu.au/doc/api/index.html
+common:
+  - type: Website
+    url: https://www.griffith.edu.au/
+  - type: GitHub
+    url: https://github.com/GriffithUniLibrary
+  - type: GitHub
+    url: https://github.com/gu-eresearch
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/griffith-university/
+  - type: Plans
+    url: plans/griffith-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/griffith-rate-limits.yml
+  - type: FinOps
+    url: finops/griffith-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
