@@ -68,6 +68,8 @@ apis:
       - type: Documentation
         url: https://lms.griffith.edu.au/doc/api/index.html
 common:
+  - type: DomainSecurity
+    url: security/griffith-domain-security.yml
   - type: Website
     url: https://www.griffith.edu.au/
   - type: GitHub
