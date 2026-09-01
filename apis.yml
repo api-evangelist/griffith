@@ -1,17 +1,24 @@
 ---
 aid: griffith
 name: Griffith University
+x-type: university
+x-category: Public Research University
 description: >-
-  Griffith University is a public research university in Queensland, Australia, ranked
-  #255 in the QS World University Rankings 2025. Its public, machine-readable developer
-  footprint centers on research and library infrastructure rather than a formal developer
-  portal. Griffith Research Online (GRO), the institutional repository, runs on DSpace 7.6
-  and exposes both a REST API and an OAI-PMH 2.0 endpoint for harvesting publication and
-  research-output metadata. The university also operates a Canvas LMS instance whose
-  Instructure REST API documentation is publicly reachable, and maintains active GitHub
-  organizations for its Library and eResearch Services teams. No unified, self-service
-  Griffith developer portal was found; most administrative, course, timetable, and identity
-  interfaces are gated behind institutional affiliation.
+  Griffith University is a public research university in South East Queensland, Australia, a member
+  of the Innovative Research Universities (IRU) network and ranked #255 in the QS World University
+  Rankings 2025. Griffith operates no public developer portal and publishes no institution-authored
+  API contract; a 2026-09-01 operator audit found that every machine-readable surface running under
+  a griffith.edu.au hostname is a vendor platform under a Griffith tenancy, confirmed by DNS. Griffith
+  Research Online (research-repository.griffith.edu.au) is a DSpace 7.6 repository hosted by Atmire,
+  serving a live REST API and a fully conformant OAI-PMH 2.0 endpoint over Griffith's own research
+  outputs. lms.griffith.edu.au is an Instructure Canvas tenancy exposing an LTI 1.3 keyset and an
+  OpenID Connect discovery document, with the REST API itself behind authentication. Griffith Experts
+  (experts.griffith.edu.au) is a Symplectic Discovery deployment. The one surface that is
+  unambiguously Griffith's own engineering identity is its SAML 2.0 Shibboleth Identity Provider,
+  registered in the Australian Access Federation and exported to eduGAIN with REFEDS Research &
+  Scholarship, Code of Conduct v2 and SIRTFI assertions. Griffith is additionally a registrant in
+  DataCite, Crossref and ROR. The main website sits behind a Cloudflare managed challenge and is
+  unreadable to non-browser clients.
 type: Index
 deliveryModel:
   model: saas
@@ -45,59 +52,187 @@ tags:
   - Higher Education
   - University
   - Australia
+  - Queensland
+  - Innovative Research Universities
   - Research
+  - Research Repository
+  - Identity Federation
+  - Learning Management
+  - OAI-PMH
   - Open Data
   - Repository
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 specificationVersion: '0.23'
 apis:
+  - aid: griffith:aaf-idp
+    name: Griffith University SAML Identity Provider (AAF / eduGAIN)
+    description: >-
+      Griffith's SAML 2.0 Shibboleth Identity Provider, entityID
+      https://idp1.griffith.edu.au/idp/shibboleth, registered in the Australian Access Federation on
+      2023-03-06 and exported to eduGAIN as entity 673155. Scope griffith.edu.au. Asserts REFEDS
+      Research & Scholarship, anonymous/pseudonymous/personalized, GEANT Data Protection Code of
+      Conduct v1, REFEDS Code of Conduct v2, and SIRTFI assurance. Machine-readable SAML metadata is
+      public at both the AAF aggregate and the institution's own host. Griffith also registers eight
+      Service Providers in AAF under OrganizationName griffith.edu.au, of which only AusNC still
+      resolves.
+    humanURL: https://aaf.edu.au/
+    baseURL: https://idp1.griffith.edu.au/idp/shibboleth
+    x-operator: federation
+    x-operator-basis: >-
+      A federation is shared by definition and the IdP behind it is the institution's. The entity,
+      scope griffith.edu.au and attribute release are Griffith's; DNS shows idp1.griffith.edu.au
+      CNAMEs to ea0e3b75322ca21d4631d2e0fa1dbcd8.idp-cname.aaf.edu.au and the technical contact is
+      support@aaf.edu.au, so the hosting is AAF managed IdP infrastructure.
+    tags: [ Identity Federation, SAML, Shibboleth, AAF, eduGAIN, Authentication ]
+    properties:
+      - type: IdentityFederation
+        url: authentication/griffith-identity-federation.yml
+      - type: Documentation
+        url: https://md.aaf.edu.au/aaf-metadata.xml
   - aid: griffith:gro-rest
     name: Griffith Research Online (GRO) DSpace REST API
     description: >-
-      REST API for Griffith Research Online, the university's institutional repository,
-      running on DSpace 7.6. Provides programmatic access to communities, collections,
-      items, bitstreams, and metadata for Griffith research outputs. The API root at
-      /server/api confirms the live DSpace REST interface.
+      REST API for Griffith Research Online, the university's institutional repository, running
+      DSpace 7.6. Serves communities, collections, items, bitstreams and metadata for Griffith
+      research outputs; the API root at /server/api returns dspaceName "Griffith Research Online" and
+      dspaceVersion "DSpace 7.6". The contract is DSpace's; the content, the repository identity and
+      the admin contact (gro@griffith.edu.au) are Griffith's.
     humanURL: https://research-repository.griffith.edu.au/
     baseURL: https://research-repository.griffith.edu.au/server/api
+    x-operator: tenant
+    x-operator-basis: >-
+      CNAME — research-repository.griffith.edu.au resolves to griffith7.cname.atmire.com. The API
+      root additionally advertises atmire-versions and atmirevaluepair endpoints, confirming an
+      Atmire-hosted DSpace rather than a Griffith-run deployment.
     tags: [ Repository, Research, DSpace, Metadata, Open Data ]
     properties:
-      - type: Documentation
+      - type: ResearchRepository
         url: https://research-repository.griffith.edu.au/
+      - type: APIReference
+        url: https://research-repository.griffith.edu.au/server/api
   - aid: griffith:gro-oai
     name: Griffith Research Online OAI-PMH
     description: >-
-      OAI-PMH 2.0 metadata harvesting endpoint for Griffith Research Online. Supports the
-      standard OAI verbs (Identify, ListMetadataFormats, ListRecords, etc.) for harvesting
-      Dublin Core and other metadata describing Griffith publications and research outputs.
+      OAI-PMH 2.0 metadata harvesting endpoint for Griffith Research Online. The Identify response
+      returns repositoryName "Griffith Research Online", adminEmail gro@griffith.edu.au,
+      repositoryIdentifier research-repository.griffith.edu.au and earliestDatestamp
+      2014-10-10T00:59:35Z. Twelve metadata formats are served — oai_dc, qdc, mods, mets, marc, rdf,
+      ore, didl, dim, xoai, etdms and uketd_dc. This is the surface through which the ARDC's Research
+      Data Australia harvests Griffith's research outputs.
     humanURL: https://research-repository.griffith.edu.au/
-    baseURL: https://research-repository.griffith.edu.au/oai/request
+    baseURL: https://research-repository.griffith.edu.au/server/oai/request
+    x-operator: tenant
+    x-operator-basis: >-
+      Same host as the GRO REST API — CNAME to griffith7.cname.atmire.com. DSpace supplies the
+      OAI-PMH implementation; the repository identity it advertises is Griffith's.
     tags: [ OAI-PMH, Repository, Research, Metadata, Harvesting ]
     properties:
+      - type: APIReference
+        url: https://research-repository.griffith.edu.au/server/oai/request?verb=Identify
       - type: Documentation
         url: https://researchdata.edu.au/griffith-research-online-oai-protocol/8941
-  - aid: griffith:canvas-lms
-    name: Griffith Canvas LMS REST API
+  - aid: griffith:experts
+    name: Griffith Experts (Symplectic Discovery)
     description: >-
-      Griffith University operates a Canvas (Instructure) learning management system at
-      lms.griffith.edu.au. The Canvas LMS REST API documentation is publicly reachable and
-      describes endpoints for courses, enrollments, assignments, and developer keys. Live
-      API access requires authentication and institutional credentials, and Instructure has
-      noted the docs will redirect to its central developer portal after July 1, 2026.
+      Griffith Experts is the university's public researcher-profile and research-output discovery
+      portal, running Symplectic Discovery (web-v6.22.0.4). Griffith's own library publishes a
+      tutorial titled "Griffith Experts and Symplectic Elements". No public machine-readable API was
+      found — the site is a single-page application that returns HTTP 200 for arbitrary paths
+      (/rest and /public-api both 200 with the same SPA shell), so status codes alone must not be
+      read as endpoint presence here.
+    humanURL: https://experts.griffith.edu.au/
+    x-operator: tenant
+    x-operator-basis: >-
+      CNAME — experts.griffith.edu.au resolves to griffith.discovery.symplectic.org, then
+      lb.apse.discovery.symplectic.org. Symplectic (Digital Science) operates the platform.
+    tags: [ Research, Researcher Profiles, Symplectic, CRIS, Discovery ]
+    properties:
+      - type: Website
+        url: https://experts.griffith.edu.au/
+      - type: Documentation
+        url: https://github.com/GriffithUniLibrary/Griffith-Experts-and-Symplectic-Elements
+  - aid: griffith:canvas-lms
+    name: Griffith Canvas LMS (Instructure) — LTI 1.3 and REST
+    description: >-
+      Griffith operates an Instructure Canvas learning management system at lms.griffith.edu.au. The
+      tenancy exposes two publicly fetchable machine-readable surfaces — an LTI 1.3 platform JWKS at
+      /api/lti/security/jwks and an OpenID Connect discovery document at
+      /.well-known/openid-configuration with issuer https://lms.griffith.edu.au. The Canvas REST API
+      itself is live but authenticated — /api/v1/accounts and /api/v1/users/self both return 401,
+      while the bare /api/v1 base returns 404, so no baseURL pointer is recorded.
+      Instructure has noted the
+      per-tenant API documentation will redirect to its central developer portal after 2026-07-01.
     humanURL: https://lms.griffith.edu.au/doc/api/index.html
-    tags: [ LMS, Canvas, Instructure, Teaching, Learning ]
+    x-operator: tenant
+    x-operator-basis: >-
+      CNAME — lms.griffith.edu.au resolves to griffith-prod-vanity.instructure.com. The vanity
+      hostname is Griffith's; the Canvas software, its REST contract and its LTI implementation are
+      Instructure's.
+    tags: [ LMS, Canvas, Instructure, LTI, OpenID Connect, Teaching, Learning ]
     properties:
       - type: Documentation
         url: https://lms.griffith.edu.au/doc/api/index.html
+      - type: Authentication
+        url: https://lms.griffith.edu.au/.well-known/openid-configuration
+  - aid: griffith:datacite
+    name: DataCite DOI Registrant — Griffith University
+    description: >-
+      Griffith University is a DataCite provider, registering DOIs for its research outputs and
+      datasets. Provider id "griffith", symbol "GRIFFITH". Recorded as a membership fact about
+      Griffith; the DataCite REST API contract belongs to DataCite and is not saved here.
+    humanURL: https://datacite.org/
+    x-operator: registry
+    x-operator-basis: >-
+      api.datacite.org is an identifier registry Griffith is registered IN, not a platform Griffith
+      operates. Evidenced by the provider record, not by host ownership.
+    tags: [ DataCite, DOI, Persistent Identifiers, Research Data, Registry ]
+    properties:
+      - type: APIReference
+        url: https://api.datacite.org/providers/griffith
+  - aid: griffith:crossref
+    name: Crossref Member — Griffith University
+    description: >-
+      Griffith University is Crossref member 5850. Two sub-unit members also resolve under the
+      Griffith name — 50610 Griffith Law School and 22062 School of Human Services and Social Work,
+      Griffith University. Recorded as a membership fact; the Crossref API contract is Crossref's.
+    humanURL: https://www.crossref.org/
+    x-operator: registry
+    x-operator-basis: >-
+      api.crossref.org is an identifier registry Griffith is registered IN. Evidenced by member id,
+      not by host ownership.
+    tags: [ Crossref, DOI, Scholarly Publishing, Registry ]
+    properties:
+      - type: APIReference
+        url: https://api.crossref.org/members/5850
+  - aid: griffith:ror
+    name: ROR Registry Record — Griffith University
+    description: >-
+      Griffith University is registered in the Research Organization Registry as
+      https://ror.org/02sc3r913. Recorded as a membership fact; the ROR API contract is ROR's.
+    humanURL: https://ror.org/02sc3r913
+    x-operator: registry
+    x-operator-basis: >-
+      api.ror.org is an organization identifier registry Griffith is registered IN, shared by every
+      registered institution by design.
+    tags: [ ROR, Organization Identifiers, Registry, Research ]
+    properties:
+      - type: APIReference
+        url: https://api.ror.org/v2/organizations/https%3A%2F%2Fror.org%2F02sc3r913
 common:
   - type: DomainSecurity
     url: security/griffith-domain-security.yml
   - type: Website
     url: https://www.griffith.edu.au/
-  - type: GitHub
+  - type: ResearchRepository
+    url: https://research-repository.griffith.edu.au/
+  - type: IdentityFederation
+    url: authentication/griffith-identity-federation.yml
+  - type: Conformance
+    url: conformance/griffith-domain-standards.yml
+  - type: GitHubOrganization
     url: https://github.com/GriffithUniLibrary
-  - type: GitHub
+  - type: GitHubOrganization
     url: https://github.com/gu-eresearch
   - type: LinkedIn
     url: https://www.linkedin.com/school/griffith-university/
@@ -109,6 +244,63 @@ common:
     url: finops/griffith-finops.yml
   - type: Review
     url: review.yml
+x-coverage:
+  state: gated
+  reason: tenant_only
+  detail: >-
+    Griffith University publishes no institution-authored API contract and operates no developer
+    portal. A DNS-based operator audit on 2026-09-01 resolved every machine-readable surface on a
+    griffith.edu.au hostname onto a vendor platform — research-repository -> atmire.com,
+    lms -> instructure.com, experts -> symplectic.org — so all three are recorded as tenancies rather
+    than as Griffith contracts. The institution's own engineering identity is its SAML 2.0 Shibboleth
+    IdP in the Australian Access Federation, exported to eduGAIN, which is recorded as `federation`
+    and is genuinely Griffith's. Three registry memberships (DataCite provider `griffith`, Crossref
+    member 5850, ROR 02sc3r913) are recorded as facts about Griffith, never as Griffith contracts.
+    Administrative, course-catalog, timetable and registrar interfaces were hunted and none resolve
+    publicly — api., data., courses., programs-courses., timetable., library., sso. and idp. under
+    griffith.edu.au all return NXDOMAIN. The Canvas REST API is live but authenticated (401). The
+    main www host sits behind a Cloudflare managed challenge (403, cf-mitigated: challenge) for every
+    non-browser client, including with full browser headers over HTTP/2, so llms.txt, robots.txt and
+    .well-known probes could not be completed there; that is a finding about the edge, not a gap in
+    Griffith's publishing. No OpenAPI, AsyncAPI or apis.json artifact is saved for Griffith because
+    none belonging to Griffith exists.
+  evidence:
+    - url: https://idp1.griffith.edu.au/idp/shibboleth
+      status: 200
+    - url: https://md.aaf.edu.au/aaf-metadata.xml
+      status: 200
+    - url: https://research-repository.griffith.edu.au/server/oai/request?verb=Identify
+      status: 200
+    - url: https://research-repository.griffith.edu.au/server/api
+      status: 200
+    - url: https://lms.griffith.edu.au/api/lti/security/jwks
+      status: 200
+    - url: https://lms.griffith.edu.au/.well-known/openid-configuration
+      status: 200
+    - url: https://lms.griffith.edu.au/api/v1/accounts
+      status: 401
+    - url: https://experts.griffith.edu.au/
+      status: 200
+    - url: https://www.griffith.edu.au/
+      status: 403
+    - url: https://www.griffith.edu.au/llms.txt
+      status: 403
+    - url: https://www.griffith.edu.au/.well-known/apis.json
+      status: 403
+    - url: https://api.datacite.org/providers?query=Griffith
+      status: 200
+    - url: https://api.crossref.org/members?query=Griffith
+      status: 200
+    - url: https://api.ror.org/v2/organizations?query=Griffith+University
+      status: 200
+    - url: https://api.griffith.edu.au/
+      status: 0
+    - url: https://data.griffith.edu.au/
+      status: 0
+    - url: https://programs-courses.griffith.edu.au/
+      status: 0
+  generated: '2026-09-01'
+  method: probed
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
