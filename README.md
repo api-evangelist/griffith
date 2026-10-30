@@ -1,4 +1,4 @@
-# Griffith University (griffith)
+# Griffith University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,48 +64,115 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Griffith University is a public research university in Queensland, Australia, ranked #255 in the QS World University Rankings 2025. This repository catalogs Griffith's public, machine-readable developer and API footprint as an APIs.json provider profile. The university's confirmed public APIs center on research and library infrastructure: the Griffith Research Online (GRO) institutional repository (DSpace 7.6) exposes a REST API and an OAI-PMH 2.0 endpoint, and a Canvas LMS REST API is publicly documented.
+Griffith University is a public research university in South East Queensland, Australia, a member of the Innovative Research Universities (IRU) network and ranked #255 in the QS World University Rankings 2025. Griffith operates no public developer portal and publishes no institution-authored API contract; a 2026-09-01 operator audit found that every machine-readable surface running under a griffith.edu.au hostname is a vendor platform under a Griffith tenancy, confirmed by DNS. Griffith Research Online (research-repository.griffith.edu.au) is a DSpace 7.6 repository hosted by Atmire, serving a live REST API and a fully conformant OAI-PMH 2.0 endpoint over Griffith's own research outputs. lms.griffith.edu.au is an Instructure Canvas tenancy exposing an LTI 1.3 keyset and an OpenID Connect discovery document, with the REST API itself behind authentication. Griffith Experts (experts.griffith.edu.au) is a Symplectic Discovery deployment. The one surface that is unambiguously Griffith's own engineering identity is its SAML 2.0 Shibboleth Identity Provider, registered in the Australian Access Federation and exported to eduGAIN with REFEDS Research & Scholarship, Code of Conduct v2 and SIRTFI assertions. Griffith is additionally a registrant in DataCite, Crossref and ROR. The main website sits behind a Cloudflare managed challenge and is unreadable to non-browser clients.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/griffith/refs/heads/main/apis.yml
-- Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=griffith-api-evangelist&utm_content=repo
+**Areas:** Education · Higher Education · University · Australia · Queensland · Innovative Research Universities · Research · Research Repository · Identity Federation · LMS · OAI-PMH · Open Data
 
-## Type
+## Griffith University on APIs.io
 
-- Index / Consumer / 3rd-Party
+Everything profiled for Griffith University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/griffith/](https://apis.io/providers/griffith/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (8)
 
-Education, Higher Education, University, Australia, Research, Open Data, Repository
+- [Griffith University SAML Identity Provider (AAF / eduGAIN)](https://apis.io/apis/griffith/aaf-idp/) — Griffith's SAML 2.0 Shibboleth Identity Provider, entityID https://idp1.griffith.edu.au/idp/shibboleth, registered in the Australian Access Federation on…
+- [Griffith Research Online (GRO) DSpace REST API](https://apis.io/apis/griffith/gro-rest/) — REST API for Griffith Research Online, the university's institutional repository, running DSpace 7.6. Serves communities, collections, items, bitstreams and…
+- [Griffith Research Online OAI-PMH](https://apis.io/apis/griffith/gro-oai/) — OAI-PMH 2.0 metadata harvesting endpoint for Griffith Research Online. The Identify response returns repositoryName "Griffith Research Online", adminEmail…
+- [Griffith Experts (Symplectic Discovery)](https://apis.io/apis/griffith/experts/) — Griffith Experts is the university's public researcher-profile and research-output discovery portal, running Symplectic Discovery (web-v6.22.0.4).…
+- [Griffith Canvas LMS (Instructure) — LTI 1.3 and REST](https://apis.io/apis/griffith/canvas-lms/) — Griffith operates an Instructure Canvas learning management system at lms.griffith.edu.au. The tenancy exposes two publicly fetchable machine-readable…
+- [DataCite DOI Registrant — Griffith University](https://apis.io/apis/griffith/datacite/) — Griffith University is a DataCite provider, registering DOIs for its research outputs and datasets. Provider id "griffith", symbol "GRIFFITH". Recorded as a…
+- [Crossref Member — Griffith University](https://apis.io/apis/griffith/crossref/) — Griffith University is Crossref member 5850. Two sub-unit members also resolve under the Griffith name — 50610 Griffith Law School and 22062 School of Human…
+- [ROR Registry Record — Griffith University](https://apis.io/apis/griffith/ror/) — Griffith University is registered in the Research Organization Registry as https://ror.org/02sc3r913. Recorded as a membership fact; the ROR API contract is…
 
-## APIs
+### Published properties
 
-- **Griffith Research Online (GRO) DSpace REST API** — DSpace 7.6 REST interface for the institutional repository (communities, collections, items, metadata). Docs: https://research-repository.griffith.edu.au/ — Base: https://research-repository.griffith.edu.au/server/api
-- **Griffith Research Online OAI-PMH** — OAI-PMH 2.0 metadata harvesting endpoint for Griffith research outputs. Docs: https://researchdata.edu.au/griffith-research-online-oai-protocol/8941 — Base: https://research-repository.griffith.edu.au/oai/request
-- **Griffith Canvas LMS REST API** — Publicly documented Canvas (Instructure) LMS REST API; live access requires institutional credentials. Docs: https://lms.griffith.edu.au/doc/api/index.html
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans, Rate Limits, and FinOps
+#### JSON-LD (1)
 
-- Plans & Pricing: [plans/griffith-plans-pricing.yml](plans/griffith-plans-pricing.yml)
-- Rate Limits: [rate-limits/griffith-rate-limits.yml](rate-limits/griffith-rate-limits.yml)
-- FinOps: [finops/griffith-finops.yml](finops/griffith-finops.yml)
+Linked-data contexts for the provider's vocabulary.
 
-## Timestamps
+- [Griffith Context](https://apis.io/jsonld/griffith/griffith-context/)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+#### Security (1)
 
-## Common Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- Website: https://www.griffith.edu.au/
-- GitHub (Library): https://github.com/GriffithUniLibrary
-- GitHub (eResearch): https://github.com/gu-eresearch
-- LinkedIn: https://www.linkedin.com/school/griffith-university/
-- Review: [review.yml](review.yml)
+- [Griffith Domain Security](https://apis.io/security/griffith/griffith-domain-security/)
 
-## Notes
+#### Plans and pricing (1)
 
-All APIs and endpoints in this profile were verified live on 2026-06-03 where possible. The GRO DSpace REST API root and the OAI-PMH 2.0 Identify/ListMetadataFormats verbs returned HTTP 200 with content identifying "Griffith Research Online" (DSpace 7.6, protocol version 2.0). The Canvas LMS API documentation page returned HTTP 200; live LMS API calls require authentication. The official website (403) and LinkedIn page (999) return anti-bot status codes to automated probes but resolve normally in a browser. Griffith has no single unified self-service developer portal; no course, timetable, or identity APIs were found openly documented, and no endpoints were fabricated.
+Published plans, tiers and prices.
 
-## Maintainers
+- [Griffith Plans Pricing](https://apis.io/plans/griffith/griffith-plans-pricing/)
 
-- Kin Lane — kin@apievangelist.com
+#### Rate limits (1)
+
+Published request limits.
+
+- [Griffith Rate Limits](https://apis.io/rate-limits/griffith/griffith-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Griffith Finops](https://apis.io/finops/griffith/griffith-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.griffith.edu.au/)
+- [GitHub](https://github.com/GriffithUniLibrary)
+
+## API Evangelist rating
+
+**Kin Score 18.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 18.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 5.3 |
+
+**Agent readiness 3.1** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/griffith/](https://apis.io/providers/griffith/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Griffith University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/griffith/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
